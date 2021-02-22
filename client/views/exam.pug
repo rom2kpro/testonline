@@ -1,0 +1,123 @@
+doctype html
+head
+  // Required meta tags
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  // Bootstrap CSS
+  link(rel='stylesheet' href='css/bootstrap.min.css')
+  link(rel='stylesheet' href='css/bootstrap-theme.min.css')
+  // jQuery
+  script(src='js/jquery.js' type='text/javascript')
+  // Bootstrap JS
+  script(src='js/bootstrap.min.js' type='text/javascript')
+  // Style css
+  link(rel='stylesheet' href='css/main.css')
+  link(rel='stylesheet' href='css/font.css')
+  link(href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css')
+  title Tr&#x1EAF;c Nghi&#x1EC7;m Online
+.header
+  .row
+    .col-lg-6
+      span.logo H&#x1EC7; Th&#x1ED1;ng Thi Tr&#x1EAF;c Nghi&#x1EC7;m
+    .col-md-4.col-md-offset-2
+      span.pull-right.top.title1
+        span.log1
+          span.glyphicon.glyphicon-user(aria-hidden='true')
+          | &nbsp;&nbsp;&nbsp;&nbsp;Hello,
+        a.log.log1(href='#')=username
+        | &nbsp;|&nbsp;
+        a.log(href='/logout')
+          span.glyphicon.glyphicon-log-out(aria-hidden='true')
+          | &nbsp;Signout
+.bg
+  nav.navbar.navbar-default.title1
+    .container-fluid
+      // Brand and toggle get grouped for better mobile display
+      .navbar-header
+        button.navbar-toggle.collapsed(type='button' data-toggle='collapse' data-target='#bs-example-navbar-collapse-1' aria-expanded='false')
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand(href='/home')
+          b Exam
+      // Collect the nav links, forms, and other content for toggling
+      #bs-example-navbar-collapse-1.collapse.navbar-collapse
+        ul.nav.navbar-nav
+          li
+            a(href='/home')
+              span.glyphicon.glyphicon-home(aria-hidden='true')
+              | &nbsp;Home
+              span.sr-only (current)
+          li
+            a(href='/home')
+              span.glyphicon.glyphicon-list-alt(aria-hidden='true')
+              | &nbsp;History
+          li.pull-right
+            a(href='/logout')
+              span.glyphicon.glyphicon-log-out(aria-hidden='true')
+              | &nbsp;&nbsp;&nbsp;&nbsp;Signout
+        form.navbar-form.navbar-left(role='search')
+          .form-group
+            input.form-control(type='text' placeholder='Enter tag ')
+          button.btn.btn-default(type='submit')
+            span.glyphicon.glyphicon-search(aria-hidden='true')
+            | &nbsp;Search
+        #time.pull-right(style='margin-top: 15px; color: red; font-size: large;') 00:00:00
+      // /.navbar-collapse
+    // /.container-fluid
+  // navigation menu closed
+  .container
+    // container start
+    .row
+      .col-md-12
+        .panel(style='margin:5%')
+          form#myForm.form-horizontal(action='/exam?id=' + question[0][1] method='POST')
+            - var n = 0
+            each val in question
+              b
+                | Question &nbsp;#{n+1}&nbsp;:
+                br
+                | 
+                =val[2]
+              br
+              br
+              input(type='text' name='ques[]' value=val[0] hidden)
+              each an in answer[n]
+                input(type='radio' name='ans['+n+']' value=an[0])
+                | &nbsp;
+                =an[2]
+                br
+                br
+              br
+              -n++
+            button.btn.btn-primary(type='submit')
+              span.glyphicon.glyphicon-lock(aria-hidden='true')
+              | &nbsp;Submit
+script.
+  time = "#{time}"
+  time = time.split(":")
+  time = (parseInt(time[0])*60*60 + parseInt(time[1])*60 + parseInt(time[2]))*1000
+
+  now = new Date().getTime();
+  time = (now + time)
+  var x = setInterval(function() {
+    // Get today's date and time
+    var now = new Date().getTime();
+    // Find the distance between now and the count down date
+    var distance = time - now;
+    // Time calculations for days, hours, minutes and seconds
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // Output the result in an element with id="demo"
+    document.getElementById("time").innerHTML = hours + ":"
+    + minutes + ":" + seconds;
+    // If the count down is over, write some text
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("time").innerHTML = "EXPIRED";
+      document.getElementById("myForm").submit();
+    }
+  }, 1000);
+

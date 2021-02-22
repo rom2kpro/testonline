@@ -1,0 +1,33 @@
+doctype html
+head
+  // Required meta tags
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  // Bootstrap CSS
+  link(rel='stylesheet' href='css/bootstrap.min.css')
+  link(rel='stylesheet' href='css/bootstrap-theme.min.css')
+  // jQuery
+  script(src='js/jquery.js' type='text/javascript')
+  // Bootstrap JS
+  script(src='js/bootstrap.min.js' type='text/javascript')
+  // Style css
+  link(rel='stylesheet' href='css/main.css')
+  link(rel='stylesheet' href='css/font.css')
+  link(href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css')
+  title Tr&#x1EAF;c Nghi&#x1EC7;m Online
+.header
+  .row
+    .col-lg-6
+      span.logo H&#x1EC7; Th&#x1ED1;ng Thi Tr&#x1EAF;c Nghi&#x1EC7;m
+.container
+  .row
+    .col
+      div(style='display: flex; justify-content: center; align-items: center; margin-top: 100px;;')
+        form(style='height: 300px; width: 300px; background-color: white; padding: 50px;' action='/login' method='POST')
+          .form-group
+            label(for='exampleInputEmail1') Username
+            input#exampleInputEmail1.form-control(type='text' aria-describedby='emailHelp' placeholder='username' name='username' required='')
+          .form-group
+            label(for='exampleInputPassword1') Password
+            input#exampleInputPassword1.form-control(type='password' placeholder='Password' name='password' required='')
+          button.btn.btn-primary(type='submit' style='margin-left: 130px;') Login
